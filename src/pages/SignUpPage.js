@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function SignUpPage() {
   const [newUser, setNewUser] = useState({
@@ -70,9 +70,8 @@ export default function SignUpPage() {
               className="form-control"
               name="about"
               onChange={onChange}
-            >
-              {newUser.about}
-            </textarea>
+              value={newUser.about}
+            />
           </div>
 
           <div className="d-grid">
