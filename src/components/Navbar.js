@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Collapse } from 'bootstrap'
+import { Collapse, Dropdown } from 'bootstrap'
+import { AuthContext } from '../context/authContext';
 
 export default function Navbar() {
+  const { me, signOut } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
@@ -29,12 +31,50 @@ export default function Navbar() {
           </ul>
 
           <ul className="navbar-nav mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link text-primary" to="/sign-in">Sign in</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="btn btn-outline-primary" to="/sign-up">Get started</Link>
-            </li>
+            {me ? (
+              <li className="nav-item dropdown">
+                <span
+                  style={{ cursor: 'pointer', }}
+                  data-bs-toggle="dropdown"
+                >
+                  {me.firstName} {me.lastName}
+                </span>
+                <ul className="dropdown-menu" id="dropdownMenu">
+                  <li>
+                    <Link className="dropdown-item" to="/profile">Profile</Link>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+
+                  <li>
+                    <Link className="dropdown-item" to="/new-article">Write an article</Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/my-articles">My articles</Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/settings">Settings</Link>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+
+                  <li>
+                    <button className="dropdown-item" onClick={signOut}>Sign Out</button>
+                  </li>
+                </ul>
+              </li>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link text-primary" to="/sign-in">Sign in</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="btn btn-outline-primary" to="/sign-up">Get started</Link>
+                </li>
+              </>
+            )}
           </ul>
 
         </div>
