@@ -1,33 +1,24 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
-import emailValid from '../utils/emailValid';
 
 export default function SignInPage() {
-  const { signIn } = useContext(AuthContext);
-
+  const history = useHistory()
+  const { me, signIn } = useContext(AuthContext);
+  
   const [userValues, setUserValues] = useState({
     email: '', password: '',
   });
-  const [errors, setErrors] = useState({
-    email: null, password: null,
-  })
 
   const onChange = e => setUserValues({ ...userValues, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
-    e.preventDefault()
-    
-    setErrors({ email: null, password: null })
-    if (!emailValid(userValues.email)) {
-      setErrors({ ...errors, email: 'Please provide a valid email.'})
-    }
-    if (userValues.password.trim() === '') {
-      setErrors({ ...errors, password: 'Please provide a password.'})
-    }
-
-    signIn(userValues)
+  const onSubmit = async e => {
+    e.preventDefault();
+    signIn(userValues);
+    history.push('/');
   };
+
+  if (me) return history.goBack();
 
   return (
     <div className="row justify-content-center">
@@ -37,29 +28,23 @@ export default function SignInPage() {
           <div className="mb-3">
             <label className="form-label" htmlFor="email">Email</label>
             <input
-              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              className="form-control"
               type="email"
               name="email"
               onChange={onChange}
               value={userValues.email}
             />
-            {errors.email && (
-              <div className="invalid-feedback">{errors.email}</div>
-            )}
           </div>
 
           <div className="mb-3">
             <label className="form-label" htmlFor="password">Password</label>
             <input
-              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+              className="form-control"
               type="password"
               name="password"
               onChange={onChange}
               value={userValues.password}
             />
-            {errors.password && (
-              <div className="invalid-feedback">{errors.password}</div>
-            )}
           </div>
 
           <div className="d-grid">

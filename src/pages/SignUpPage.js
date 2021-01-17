@@ -6,7 +6,6 @@ export default function SignUpPage() {
     firstName: '', lastName: '', email: '', password: '', about: ''
   })
 
-
   const onChange = e => setNewUser({ ...newUser, [e.target.name]: e.target.value })
 
   const onSubmit = e => {
