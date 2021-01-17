@@ -17,7 +17,7 @@ export default function SignUpPage() {
   return (
     <div className="row justify-content-center">
       <div className="col-12 col-lg-6">
-        <h2 className="text-center mb-5">Sign In</h2>
+        <h2 className="text-center mb-5">Sign Up</h2>
         <form className="needs-validation" onSubmit={onSubmit} autoComplete="off">
           <div className="row mb-3">
             <div className="col-12 col-lg-6 mb-3 mb-lg-0">
