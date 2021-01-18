@@ -6,17 +6,24 @@ import Loader from '../components/Loader';
 export default function ArticlePage() {
   const { articleSlug } = useParams();
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null);
   const [article, setArticle] = useState();
 
   useEffect(() => {
-    fetch(`/api/articles/${articleSlug}`)
-      .then(res => res.json())
-      .then(json => {
-        setArticle(json.data.article)
-        setLoading(false)
-      })
+    const fetchArticle = async () => {
+      const res = await fetch(`/api/articles/${articleSlug}`);
+      const json = await res.json();
+      if (res.ok) {
+        setArticle(json.data.article);
+      } else {
+        setError(json.error)
+      }
+      setLoading(false);
+    }
+    fetchArticle()
   }, [articleSlug])
 
+  if (error) return <p>Not Found</p>
   if (loading) return <Loader />
 
   return (
