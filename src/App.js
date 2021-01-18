@@ -7,6 +7,9 @@ import Navbar from './components/Navbar';
 
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
+import HomePage from './pages/HomePage';
+import NewArticlePage from './pages/NewArticlePage';
+import ArticlePage from './pages/ArticlePage';
 
 function App() {
   const { loading } = useContext(AuthContext)
@@ -19,13 +22,19 @@ function App() {
       <div className="container">
         <Switch>
           <Route path="/" exact>
-            <h1>Home</h1>
+            <HomePage />
           </Route>
           <Route path="/sign-up" exact>
             <SignUpPage />
           </Route>
           <Route path="/sign-in" exact>
             <SignInPage />
+          </Route>
+          <Route path="/new-article" exact>
+            <NewArticlePage />
+          </Route>
+          <Route path="/a/:articleSlug">
+            <ArticlePage />
           </Route>
         </Switch>
       </div>

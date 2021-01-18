@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 
-const JWT_KEY = 'access-token'
+export const JWT_KEY = 'access-token'
 
 export const AuthContext = createContext({
   loading: true,
