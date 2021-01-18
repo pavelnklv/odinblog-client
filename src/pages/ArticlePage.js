@@ -1,6 +1,7 @@
 import MDEditor from '@uiw/react-md-editor';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Comments from '../components/Comments';
 import Loader from '../components/Loader';
 
 export default function ArticlePage() {
@@ -28,9 +29,18 @@ export default function ArticlePage() {
 
   return (
     <div className="row">
-      <div className="col">
-        <h2 className="mb-3">{article.title}</h2>
-        <MDEditor.Markdown source={article.text} />
+      <div className="col-12">
+        <div className="row">
+          <div className="col">
+            <h2 className="mb-3">{article.title}</h2>
+            <MDEditor.Markdown source={article.text} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <Comments article={articleSlug} />
+          </div>
+        </div>
       </div>
     </div>
   );
