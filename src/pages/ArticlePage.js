@@ -30,7 +30,7 @@ export default function ArticlePage() {
   return (
     <div className="row">
       <div className="col-12">
-        <div className="row">
+        <div className="row mb-3">
           <div className="col">
             <h2 className="mb-3">{article.title}</h2>
             <MDEditor.Markdown source={article.text} />
@@ -38,6 +38,7 @@ export default function ArticlePage() {
         </div>
         <div className="row">
           <div className="col">
+            <h3 className="mb-3">Comments</h3>
             <Comments article={articleSlug} />
           </div>
         </div>
