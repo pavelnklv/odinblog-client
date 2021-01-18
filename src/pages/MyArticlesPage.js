@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Loader from '../components/Loader';
-import { JWT_KEY } from '../context/authContext';
+import { AuthContext, JWT_KEY } from '../context/authContext';
 
 export default function MyArticlesPage() {
+  const { me } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('drafts');
   const [loading, setLoading] = useState(true);
   const [articles, setArticles] = useState([]);
@@ -20,16 +21,14 @@ export default function MyArticlesPage() {
         });
     } else if (activeTab === 'published') {
       setLoading(true);
-      fetch('/api/articles/me/published', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem(JWT_KEY) }` }
-      })
+      fetch(`/api/users/${me._id}/articles`)
         .then(res => res.json())
         .then(json => {
           setArticles(json.data.articles);
           setLoading(false);
         });
     }
-  }, [activeTab])
+  }, [activeTab, me])
 
   return (
     <div className="row">

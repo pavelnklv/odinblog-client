@@ -41,7 +41,7 @@ export default function Navbar() {
                 </span>
                 <ul className="dropdown-menu" id="dropdownMenu">
                   <li>
-                    <Link className="dropdown-item" to="/profile">Profile</Link>
+                    <Link className="dropdown-item" to={`/u/${me._id}`}>Profile</Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />

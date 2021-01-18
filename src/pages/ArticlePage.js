@@ -29,7 +29,7 @@ export default function ArticlePage() {
   return (
     <div className="row">
       <div className="col">
-        <h2>{article.title}</h2>
+        <h2 className="mb-3">{article.title}</h2>
         <MDEditor.Markdown source={article.text} />
       </div>
     </div>

@@ -23,7 +23,7 @@ export default function HomePage() {
                   <p>
                     <small>
                       Posted by {' '}
-                      <Link className="text-decoration-none" to={`/users/${article.author._id}`}>
+                      <Link className="text-decoration-none" to={`/u/${article.author._id}`}>
                         {article.author.firstName} {article.author.lastName}
                       </Link>
                       {' '} at {article.createdAt}
