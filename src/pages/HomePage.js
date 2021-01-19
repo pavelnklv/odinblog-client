@@ -3,12 +3,13 @@ import Loader from '../components/Loader';
 import useArticles from '../hooks/useArticles';
 import { JWT_KEY } from '../context/authContext';
 import ArticleItem from '../components/ArticleItem';
+import { API_URL } from '../App';
 
 export default function HomePage() {
   const { loading, error, articles, setArticles } = useArticles('?sort=-createdAt');
 
   const onArticleDeleteClick = async articleSlug => {
-    const res = await fetch(`/api/articles/${articleSlug}`, {
+    const res = await fetch(`${API_URL}/articles/${articleSlug}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${localStorage.getItem(JWT_KEY)}`}
     });

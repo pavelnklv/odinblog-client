@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
+import { API_URL } from '../App';
 
 export const JWT_KEY = 'access-token'
 
@@ -15,7 +16,7 @@ export const AuthContextProvider = ({ children }) => {
   const [me, setMe] = useState(null);
 
   const fetchMe = async () => {
-    const res = await fetch('/api/me', {
+    const res = await fetch(`${API_URL}/me`, {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${localStorage.getItem(JWT_KEY)}`}
     })
@@ -28,7 +29,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const signIn = async (userValues) => {
     setLoading(true);
-    const res = await fetch('/api/auth/access-token', {
+    const res = await fetch(`${API_URL}/auth/access-token`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', },
       body: JSON.stringify(userValues),
@@ -43,7 +44,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const signUp = async (newUserValues) => {
     setLoading(true);
-    const res = await fetch('/api/users', {
+    const res = await fetch(`${API_URL}/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newUserValues),

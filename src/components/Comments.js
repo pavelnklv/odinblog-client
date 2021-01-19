@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { API_URL } from '../App';
 import { AuthContext, JWT_KEY } from '../context/authContext';
 import Loader from './Loader';
 
@@ -11,7 +12,7 @@ export default function Comments({ article }) {
   const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
-    fetch(`/api/articles/${article}/comments`)
+    fetch(`${API_URL}/articles/${article}/comments`)
       .then(res => res.json())
       .then(json => {
         setComments(json.data.comments);
@@ -26,7 +27,7 @@ export default function Comments({ article }) {
       return
     }
 
-    fetch('/api/comments', {
+    fetch(`${API_URL}/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

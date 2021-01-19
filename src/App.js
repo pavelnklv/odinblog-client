@@ -14,6 +14,8 @@ import MyArticlesPage from './pages/MyArticlesPage';
 import UserPage from './pages/UserPage';
 import EditArticlePage from './pages/EditArticlePage';
 
+export const API_URL = process.env.API_URL || 'http://localhost:3001/api'
+
 function App() {
   const { loading } = useContext(AuthContext)
 

@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../App';
 import Loader from '../components/Loader';
 import { AuthContext, JWT_KEY } from '../context/authContext';
 
@@ -10,7 +11,7 @@ export default function MyArticlesPage() {
   const [articles, setArticles] = useState([]);
 
   const onDeleteClick = async articleSlug => {
-    const res = await fetch(`/api/articles/${articleSlug}`, {
+    const res = await fetch(`${API_URL}/articles/${articleSlug}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${localStorage.getItem(JWT_KEY)}`}
     });
@@ -23,7 +24,7 @@ export default function MyArticlesPage() {
   useEffect(() => {
     if (activeTab === 'drafts') {
       setLoading(true);
-      fetch('/api/articles/me/drafts', {
+      fetch(`${API_URL}/articles/me/drafts`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem(JWT_KEY)}` }
       })
         .then(res => res.json())
@@ -33,7 +34,7 @@ export default function MyArticlesPage() {
         });
     } else if (activeTab === 'published') {
       setLoading(true);
-      fetch(`/api/users/${me._id}/articles`)
+      fetch(`${API_URL}/users/${me._id}/articles`)
         .then(res => res.json())
         .then(json => {
           setArticles(json.data.articles);

@@ -1,6 +1,7 @@
 import MDEditor from '@uiw/react-md-editor';
 import { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { API_URL } from '../App';
 import Loader from '../components/Loader';
 import { AuthContext, JWT_KEY } from '../context/authContext';
 
@@ -26,7 +27,7 @@ export default function EditArticlePage() {
       published: article.published,
     });
 
-    fetch(`/api/articles/${articleSlug}`, {
+    fetch(`${API_URL}/articles/${articleSlug}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +41,7 @@ export default function EditArticlePage() {
 
   useEffect(() => {
     const fetchArticle = async () => {
-      const res = await fetch(`/api/articles/${articleSlug}`);
+      const res = await fetch(`${API_URL}/articles/${articleSlug}`);
       const json = await res.json();
       setArticle(json.data.article);
       setLoading(false);

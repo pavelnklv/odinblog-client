@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { API_URL } from '../App';
 
 export default function useArticles(query) {
   const [loading, setLoading] = useState(true);
@@ -6,7 +7,7 @@ export default function useArticles(query) {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/articles/${query || ''}`)
+    fetch(`${API_URL}/articles/${query || ''}`)
       .then(res => res.json())
       .then(json => {
         setArticles(json.data.articles);

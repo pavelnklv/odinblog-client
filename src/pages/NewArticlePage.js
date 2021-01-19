@@ -1,6 +1,7 @@
 import MDEditor from '@uiw/react-md-editor';
 import { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { API_URL } from '../App';
 import { AuthContext, JWT_KEY } from '../context/authContext';
 
 export default function NewArticlePage() {
@@ -21,7 +22,7 @@ export default function NewArticlePage() {
       tags: tags.split(',').map(tag => tag.trim()),
       published,
     });
-    fetch('/api/articles', {
+    fetch(`${API_URL}/articles`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

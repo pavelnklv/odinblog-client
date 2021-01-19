@@ -1,6 +1,7 @@
 import MDEditor from '@uiw/react-md-editor';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { API_URL } from '../App';
 import Comments from '../components/Comments';
 import Loader from '../components/Loader';
 
@@ -12,7 +13,7 @@ export default function ArticlePage() {
 
   useEffect(() => {
     const fetchArticle = async () => {
-      const res = await fetch(`/api/articles/${articleSlug}`);
+      const res = await fetch(`${API_URL}/articles/${articleSlug}`);
       const json = await res.json();
       if (res.ok) {
         setArticle(json.data.article);

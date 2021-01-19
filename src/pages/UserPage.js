@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { API_URL } from '../App';
 import ArticleItem from '../components/ArticleItem';
 import Loader from '../components/Loader';
 
@@ -10,7 +11,7 @@ export default function UserPage() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/users/${params.userId}`)
+    fetch(`${API_URL}/users/${params.userId}`)
       .then(res => res.json())
       .then(json => setUser(json.data.user))
       .then(() => fetch(`/api/users/${params.userId}/articles`)
