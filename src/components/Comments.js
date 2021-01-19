@@ -1,4 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
 import { AuthContext, JWT_KEY } from '../context/authContext';
 import Loader from './Loader';
 
@@ -48,7 +50,7 @@ export default function Comments({ article }) {
     <div className="row">
       <div className="col">
         {me ? (
-          <form>
+          <form className="mb-3">
             <textarea
               className="form-control mb-3"
               placeholder="Write a comment"
@@ -65,13 +67,23 @@ export default function Comments({ article }) {
         ) : (
           <p>Please sign in to add a comment.</p>
         )}
-        <ul className="list-group list-group-flush">
+        <div className="row">
             {comments.map(comment => (
-              <li className="list-group-item" key={comment._id}>
-                {comment.author.firstName} {comment.author.lastName}: {comment.text}
-              </li>
+              <div className="col-12 mb-1 border-bottom" key={comment._id}>
+                <h6>
+                  <Link
+                    className="text-decoration-none"
+                    to={`/u/comment.author._id`}
+                    >
+                    {comment.author.firstName} {comment.author.lastName}
+                  </Link>
+                  {' · '}
+                  {moment(comment.createdAt).fromNow()}
+                </h6>
+               <p>{comment.text}</p>
+              </div>
             ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
