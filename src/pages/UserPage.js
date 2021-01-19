@@ -5,7 +5,7 @@ import Loader from '../components/Loader';
 export default function UserPage() {
   const params = useParams();
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
@@ -19,6 +19,12 @@ export default function UserPage() {
           setLoading(false);
         }));
   }, [params])
+
+  useEffect(() => {
+    if (user) {
+      document.title = `${user.firstName} ${user.lastName} - Odinblog`
+    }
+  }, [user])
 
   if (loading) return <Loader />;
 

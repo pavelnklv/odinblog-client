@@ -1,17 +1,27 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
 
 export default function SignUpPage() {
-  const [newUser, setNewUser] = useState({
+  const history = useHistory()
+  const { me, signUp } = useContext(AuthContext)
+  const [newUserValues, setNewUserValues] = useState({
     firstName: '', lastName: '', email: '', password: '', about: ''
   })
 
-  const onChange = e => setNewUser({ ...newUser, [e.target.name]: e.target.value })
+  const onChange = e => setNewUserValues({ ...newUserValues, [e.target.name]: e.target.value })
 
   const onSubmit = e => {
     e.preventDefault()
-    alert(JSON.stringify(newUser))
+    signUp(newUserValues)
+    history.push('/')
   }
+
+  useEffect(() => {
+    document.title = 'Sign Up - Odinblog'
+  }, [])
+
+  if (me) return history.goBack()
 
   return (
     <div className="row justify-content-center">
@@ -26,7 +36,7 @@ export default function SignUpPage() {
                 type="text"
                 name="firstName"
                 onChange={onChange}
-                value={newUser.firstName}
+                value={newUserValues.firstName}
               />
             </div>
             <div className="col-12 col-lg-6">
@@ -36,7 +46,7 @@ export default function SignUpPage() {
                 type="text"
                 name="lastName"
                 onChange={onChange}
-                value={newUser.lastName}
+                value={newUserValues.lastName}
               />
             </div>
           </div>
@@ -48,7 +58,7 @@ export default function SignUpPage() {
               type="email"
               name="email"
               onChange={onChange}
-              value={newUser.email}
+              value={newUserValues.email}
             />
           </div>
 
@@ -59,7 +69,7 @@ export default function SignUpPage() {
               type="password"
               name="password"
               onChange={onChange}
-              value={newUser.password}
+              value={newUserValues.password}
             />
           </div>
 
@@ -69,7 +79,7 @@ export default function SignUpPage() {
               className="form-control"
               name="about"
               onChange={onChange}
-              value={newUser.about}
+              value={newUserValues.about}
             />
           </div>
 

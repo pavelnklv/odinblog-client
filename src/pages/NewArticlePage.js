@@ -39,6 +39,10 @@ export default function NewArticlePage() {
     return () => clearTimeout(timer);
   }, [saved]);
 
+  useEffect(() => {
+    document.title = 'Write an article - Odinblog'
+  }, [])
+
   if (!me) return <Redirect to="/sign-in" />;
 
   return (
@@ -87,7 +91,7 @@ export default function NewArticlePage() {
             />
           </div>
           <div className="mb-3">
-            <button className="btn btn-primary" type="submit">Post</button>
+            <button className="btn btn-primary" type="submit">Save</button>
           </div>
         </form>
       </div>

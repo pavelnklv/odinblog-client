@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
 
@@ -17,6 +17,10 @@ export default function SignInPage() {
     signIn(userValues);
     history.push('/');
   };
+
+  useEffect(() => {
+    document.title = 'Sign In - Odinblog'
+  }, [])
 
   if (me) return history.goBack();
 

@@ -24,6 +24,12 @@ export default function ArticlePage() {
     fetchArticle()
   }, [articleSlug])
 
+  useEffect(() => {
+    if (article) {
+      document.title = `${article.title} - Odinblog`
+    }
+  }, [article])
+
   if (error) return <p>Not Found</p>
   if (loading) return <Loader />
 
@@ -38,7 +44,7 @@ export default function ArticlePage() {
         </div>
         <div className="row">
           <div className="col-8">
-            <h3 className="mb-3">Comments</h3>
+            <hr />
             <Comments article={articleSlug} />
           </div>
         </div>

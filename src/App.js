@@ -44,6 +44,9 @@ function App() {
           <Route path="/u/:userId">
             <UserPage />
           </Route>
+          <Route path="/settings" exact>
+            <h1>In Developing</h1>
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>
