@@ -31,13 +31,13 @@ export default function ArticlePage() {
     <div className="row">
       <div className="col-12">
         <div className="row mb-3">
-          <div className="col">
+          <div className="col-8">
             <h2 className="mb-3">{article.title}</h2>
             <MDEditor.Markdown source={article.text} />
           </div>
         </div>
         <div className="row">
-          <div className="col">
+          <div className="col-8">
             <h3 className="mb-3">Comments</h3>
             <Comments article={articleSlug} />
           </div>

@@ -9,7 +9,7 @@ export default function Comments({ article }) {
   const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
-    fetch(`/api/comments/${article}`)
+    fetch(`/api/articles/${article}/comments`)
       .then(res => res.json())
       .then(json => {
         setComments(json.data.comments);
@@ -19,6 +19,10 @@ export default function Comments({ article }) {
 
   const onAddCommentClick = e => {
     e.preventDefault()
+
+    if (newComment === '') {
+      return
+    }
 
     fetch('/api/comments', {
       method: 'POST',
@@ -42,7 +46,7 @@ export default function Comments({ article }) {
 
   return (
     <div className="row">
-      <div className="col-6">
+      <div className="col">
         {me ? (
           <form>
             <textarea

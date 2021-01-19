@@ -17,5 +17,5 @@ export default function useArticles(query) {
       })
   }, [query]);
 
-  return { loading, error, articles };
+  return { loading, error, articles, setArticles };
 }
