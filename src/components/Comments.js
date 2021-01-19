@@ -74,7 +74,7 @@ export default function Comments({ article }) {
                 <h6>
                   <Link
                     className="text-decoration-none"
-                    to={`/u/comment.author._id`}
+                    to={`/u/${comment.author._id}`}
                     >
                     {comment.author.firstName} {comment.author.lastName}
                   </Link>
