@@ -14,7 +14,7 @@ export default function UserPage() {
     fetch(`${API_URL}/users/${params.userId}`)
       .then(res => res.json())
       .then(json => setUser(json.data.user))
-      .then(() => fetch(`/api/users/${params.userId}/articles`)
+      .then(() => fetch(`${API_URL}/users/${params.userId}/articles`)
         .then(res => res.json())
         .then(json => {
           setArticles(json.data.articles);
