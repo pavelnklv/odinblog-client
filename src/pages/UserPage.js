@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ArticleItem from '../components/ArticleItem';
 import Loader from '../components/Loader';
 
 export default function UserPage() {
@@ -38,7 +39,7 @@ export default function UserPage() {
           </div>
           <div className="col-9">
             {articles.map(article => (
-              <h6 key={article._id}>{article.title}</h6>
+              <ArticleItem key={article._id} article={article} />
             ))}
           </div>
         </div>

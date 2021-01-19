@@ -12,6 +12,7 @@ import NewArticlePage from './pages/NewArticlePage';
 import ArticlePage from './pages/ArticlePage';
 import MyArticlesPage from './pages/MyArticlesPage';
 import UserPage from './pages/UserPage';
+import EditArticlePage from './pages/EditArticlePage';
 
 function App() {
   const { loading } = useContext(AuthContext)
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route path="/new-article" exact>
             <NewArticlePage />
+          </Route>
+          <Route path="/a/:articleSlug/edit">
+            <EditArticlePage />
           </Route>
           <Route path="/a/:articleSlug">
             <ArticlePage />
